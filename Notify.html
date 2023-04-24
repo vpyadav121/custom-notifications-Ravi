@@ -1,32 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Custom Notification App</title>
-  </head>
-  <body>
-    <div style="padding: 30px;">
-        Token : <input type="text" id="txtToken" style="width: 100%;">
-        <br>
-        <button id="btnSubscribe" value="click to subscribe" style="height:150px;width:250px;margin-top: 30px;">Click to Subscribe</button>
-        <br><br>
-        <sapn id="spnMessage" style="margin-top:50px;">-</sapn>
-    </div>
+
+<html>
+<head>
+    <title>Notification</title>
+</head>
+
+<body>
+    Hello Notification
+
+    <button id="PromptForAccessBtn" value="click to subscribe">click to subscribe</button>
+
+
     <script>
         if ('serviceWorker' in navigator) {
+            debugger;
             window.addEventListener("load", () => {
                 navigator.serviceWorker.register("/ServiceWorker.js")
                     .then((reg) => {
@@ -38,7 +24,7 @@
                         } else {
                             //$("#GiveAccess").show();
 
-                            const button = document.getElementById("btnSubscribe");
+                            const button = document.getElementById("PromptForAccessBtn");
                             button.addEventListener("click", () => { requestNotificationAccess(reg) });
                         }
                     });
@@ -84,12 +70,7 @@
             endpoint= sub.endpoint;
             p256dh = arrayBufferToBase64(sub.getKey("p256dh"));
             auth = arrayBufferToBase64(sub.getKey("auth"));
-            var subJson = JSON.stringify(sub);
-            const tokenB64 = btoa(unescape(encodeURIComponent(subJson)));
-            var token = document.getElementById("txtToken");
-            txtToken.value=tokenB64;
-            var spn = document.getElementById("spnMessage");
-            spn.innerText = "Message! Token Already Subscribed."
+            alert("Subscribed.")
         }
 
         function arrayBufferToBase64(buffer) {
@@ -101,11 +82,7 @@
             }
             return window.btoa(binary);
         }
+    </script>
 
-        addEventListener('push', function (e) {
-            alert("Foreground Message.")
-        });
-
-</script>
-  </body>
+</body>
 </html>

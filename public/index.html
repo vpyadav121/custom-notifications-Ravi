@@ -59,21 +59,34 @@
             });
         }
 
-        function getSubscription(reg) {
-            reg.pushManager.getSubscription().then(function (sub) {
-                if (sub === null) {
-                    reg.pushManager.subscribe({
+        function getSubscription(reg) {debugger;
+            reg.pushManager.subscribe({
                         userVisibleOnly: true,
                         applicationServerKey: "BOFZYu1Y0Ne0ERzECGnSaY6ik7XubyvCZfjdgk7BjmZJVuXoJ9D0HORdRkr5Y5iQxxdloyEmU8yk_yWmVbClMBg"
                     }).then(function (sub) {
+                        console.log("sub",sub);
                         fillSubscribeFields(sub);
                     }).catch(function (e) {
-                        console.error("Unable to subscribe to push", e);
+                        var spn = document.getElementById("spnMessage");
+                        spn.innerText = "[pushManager.subscribe error] " + e;
+                        console.error("[pushManager.subscribe error] ", e);
                     });
-                } else {
-                    fillSubscribeFields(sub);
-                }
-            });
+                    alert("end of method");
+
+            // reg.pushManager.getSubscription().then(function (sub) {
+            //     if (sub === null) {
+            //         reg.pushManager.subscribe({
+            //             userVisibleOnly: true,
+            //             applicationServerKey: "BOFZYu1Y0Ne0ERzECGnSaY6ik7XubyvCZfjdgk7BjmZJVuXoJ9D0HORdRkr5Y5iQxxdloyEmU8yk_yWmVbClMBg"
+            //         }).then(function (sub) {
+            //             fillSubscribeFields(sub);
+            //         }).catch(function (e) {
+            //             console.error("Unable to subscribe to push", e);
+            //         });
+            //     } else {
+            //         fillSubscribeFields(sub);
+            //     }
+            // });
         }
 
         var endpoint;

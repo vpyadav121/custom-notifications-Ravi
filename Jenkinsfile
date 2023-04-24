@@ -1,7 +1,7 @@
 pipeline {
     agent any
 tools {
-   nodejs 'Node12'
+   nodejs 'Node14'
 }  
 parameters {
   choice choices: ['DEV'], name: 'ENVIRONMENT'
